@@ -31,6 +31,26 @@ class Search
     nil
   end
 
+  def depth_first_search(value)
+    return nil if root == nil
+    stack = [root]
+    until stack.empty?
+      first_element = stack[0]
+      while stack.last.left_child != nil
+        stack.push(stack.last.left_child)
+      end
+      while first_element == stack[0]
+        node = stack.pop
+        if node.value == value
+          return node
+        else
+          stack.push(node.right_child) unless node.right_child.nil?
+        end
+      end
+    end
+    nil
+  end
+
   private
 
   def place_child(parent, child)
@@ -67,6 +87,3 @@ class Search
     child.parent = parent
   end
 end
-
-a = Search.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-p a.breadth_first_search(23)

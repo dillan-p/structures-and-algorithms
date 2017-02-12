@@ -42,13 +42,28 @@ RSpec.describe Search do
       expect(subject.breadth_first_search(1)).to eq(nil)
     end
 
-    it "return nil if value not in array" do
+    it "returns nil if value not in array" do
       expect(search.breadth_first_search(111)).to eq(nil)
     end
-    
+
     it "returns node if value is in tree" do
       position = root.left_child.right_child.right_child
       expect(search.breadth_first_search(23)).to eq(position)
+    end
+  end
+
+  describe "#depth_first_search" do
+    it "returns nil if array is empty" do
+      expect(subject.depth_first_search(1)).to eq(nil)
+    end
+
+    it "returns nil if value not in array" do
+      expect(search.depth_first_search(111)).to eq(nil)
+    end
+
+    it "returns node if value is in tree" do
+      position = root.left_child.right_child.right_child
+      expect(search.depth_first_search(23)).to eq(position)
     end
   end
 end
