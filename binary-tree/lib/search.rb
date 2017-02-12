@@ -16,6 +16,21 @@ class Search
     end
   end
 
+  def breadth_first_search(value)
+    return nil if root == nil
+    queue = [root]
+    until queue.empty?
+      node = queue.shift
+      if node.value == value
+        return node
+      else
+        queue.push(node.left_child) unless node.left_child.nil?
+        queue.push(node.right_child) unless node.right_child.nil?
+      end
+    end
+    nil
+  end
+
   private
 
   def place_child(parent, child)
@@ -52,3 +67,6 @@ class Search
     child.parent = parent
   end
 end
+
+a = Search.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+p a.breadth_first_search(23)

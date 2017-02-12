@@ -8,6 +8,10 @@ RSpec.describe Search do
   let(:root) { search.root }
 
   describe "#build_tree" do
+    it "returns nil if array is empty" do
+        expect(subject.root).to eq(nil)
+    end
+
     it "assigns a value to the root" do
       expect(root.value).to eq(324)
     end
@@ -30,6 +34,21 @@ RSpec.describe Search do
 
     it "assigns child with same value to the left" do
       expect(root.left_child.right_child.left_child.left_child.value).to eq(4)
+    end
+  end
+
+  describe "#breadth_first_search" do
+    it "returns nil if array is empty" do
+      expect(subject.breadth_first_search(1)).to eq(nil)
+    end
+
+    it "return nil if value not in array" do
+      expect(search.breadth_first_search(111)).to eq(nil)
+    end
+    
+    it "returns node if value is in tree" do
+      position = root.left_child.right_child.right_child
+      expect(search.breadth_first_search(23)).to eq(position)
     end
   end
 end
