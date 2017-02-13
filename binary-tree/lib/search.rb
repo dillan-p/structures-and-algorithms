@@ -51,6 +51,18 @@ class Search
     nil
   end
 
+  def dfs_rec(value, current_node=@root)
+    return nil if root == nil
+    stack = [current_node]
+    until stack.empty?
+      node = stack.pop
+      dfs = dfs_rec(value, current_node.left_child) unless current_node.left_child.nil?
+      return dfs unless dfs == nil
+      return node if node.value == value
+      stack.push(node.right_child) unless node.right_child.nil?
+    end
+  end
+
   private
 
   def place_child(parent, child)
@@ -87,3 +99,7 @@ class Search
     child.parent = parent
   end
 end
+
+a = Search.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
+p a.depth_first_search(23).value
+p a.dfs_rec(23)
